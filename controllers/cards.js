@@ -16,12 +16,13 @@ module.exports.createCard = (req, res) => {
 
 module.exports.deleteCard = (req, res) => {
   Card.findById(req.params.cardId)
-    .orFail(() => {
-      res.status(404).send({ message: 'Нет такой карточки' });
-    })
     .then((card) => {
-      card.remove();
-      return res.send({ data: card });
+      if (card === null) {
+        res.status(404).send({ message: 'Нет такой карточки' });
+      } else {
+        card.remove();
+        res.send({ data: card });
+      }
     })
     .catch((err) => res.status(500).send({ message: err.message }));
 };

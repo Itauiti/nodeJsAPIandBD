@@ -7,10 +7,14 @@ module.exports.getAllUsers = (req, res) => {
 };
 module.exports.getUser = (req, res) => {
   User.findById(req.params.id)
-    .orFail(() => {
-      res.status(404).send({ message: 'Нет пользователя с таким id' });
+    .then((user) => {
+      if (user === null) {
+        res.status(404).send({ message: 'Нет такого пользователя' });
+      } else {
+        user.remove();
+        res.send({ data: user });
+      }
     })
-    .then((user) => res.send({ data: user }))
     .catch((err) => res.status(500).send({ message: err.message }));
 };
 
@@ -34,7 +38,14 @@ module.exports.updateProfile = (req, res) => {
       upsert: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => {
+      if (user === null) {
+        res.status(404).send({ message: 'Нет такого пользователя' });
+      } else {
+        user.remove();
+        res.send({ data: user });
+      }
+    })
     .catch((err) => res.status(500).send({ message: err.message }));
 };
 
@@ -50,6 +61,13 @@ module.exports.updateAvatar = (req, res) => {
       upsert: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => {
+      if (user === null) {
+        res.status(404).send({ message: 'Нет такого пользователя' });
+      } else {
+        user.remove();
+        res.send({ data: user });
+      }
+    })
     .catch((err) => res.status(500).send({ message: err.message }));
 };

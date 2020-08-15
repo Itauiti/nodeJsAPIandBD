@@ -1,6 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 
 const cardsRouter = require('./routes/cards');
 const usersRouter = require('./routes/users');
@@ -21,6 +28,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(bodyParser());
+app.use(helmet());
+app.use(limiter);
 
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);

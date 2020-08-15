@@ -25,6 +25,8 @@ Node.js, express.js, MongoDBб, ES6, OOP, CSS3, HTML5, BEM
 - [body-parser](https://www.npmjs.com/package/body-parser)
 - [express](https://expressjs.com)
 - [validator](https://www.npmjs.com/package/validator)
+- [helmet](https://helmetjs.github.io/)
+- [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
 - mongoose
 
 ## Инструкции по запуску:
