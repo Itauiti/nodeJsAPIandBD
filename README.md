@@ -32,7 +32,7 @@
 - если в любом из запросов что-то идёт не так, сервер возвращает ответ с ошибкой и соответствующим ей статусом;
 
 ## Стэк технологий:
-Node.js, express.js, MongoDBб, ES6, OOP, CSS3, HTML5, BEM
+Node.js, express.js, MongoDB
 
 ## Пакеты, которые используются в сборках:
 - [body-parser](https://www.npmjs.com/package/body-parser)
